@@ -6,6 +6,7 @@ from BitVector import *
 from MillerRabin import *
 
 
+# A class to implement RSA encryption and decryption
 class RSA:
     def __init__(self, keysize = 32):
         self.keysize = keysize
@@ -15,6 +16,7 @@ class RSA:
         self.n = 0
         self.phi = 0
 
+    # check if two numbers are coprime
     def is_coprime(self, a, b):
         bv_a = BitVector(intVal = a)
         bv_b = BitVector(intVal = b)
@@ -24,6 +26,7 @@ class RSA:
         else:
             return False
 
+    # generate a random prime number of keysize/2 bits
     def generate_e(self,phi):
         #e = 45097
         e = self.mr.generate_prime(self.keysize//2)
@@ -31,6 +34,7 @@ class RSA:
             e = self.mr.generate_prime(self.keysize//2)
         return e
 
+    # get the multiplicative inverse of a number Extended Euclidean Algorithm
     def get_multiplicative_inverse(self,e,phi):
         d, new_d, r, new_r = 0, 1, phi, e
 
@@ -45,6 +49,7 @@ class RSA:
             d += phi
         return d
 
+    # Generate a public and private key pair
     def generateKeys(self):
         p, q = self.mr.generate_prime_duo(self.keysize // 2)
         self.n = p * q
@@ -57,20 +62,28 @@ class RSA:
         #self.private_key = 2123962321
 
         #return (n, e, d)
-        return self.n, self.phi, self.public_key, self.private_key
+        pub_tuple = (self.public_key, self.n)
+        pri_tuple = (self.private_key, self.n)
+        keys = {
+            "public": pub_tuple,
+            "private": pri_tuple
+        }
+        return keys
 
 
-    def encrypt(self, plaintext):
+    # RSA encryption
+    def encrypt(self, plaintext,public_key,n):
         ciphertext = []
         for i in plaintext:
-            ciphertext.append(pow(ord(i), self.public_key, self.n))
+            ciphertext.append(pow(ord(i), public_key, n))
 
         return ciphertext
 
-    def decrypt(self,ciphertext):
+    # RSA decryption
+    def decrypt(self,ciphertext,private_key,n):
         p = ""
         for i in range(len(ciphertext)):
-            res = pow(ciphertext[i], self.private_key, self.n)
+            res = pow(ciphertext[i], private_key, n)
             p += chr(res)
 
 

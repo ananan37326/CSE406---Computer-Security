@@ -1,11 +1,14 @@
 import random
 
 
+# A class to generate large prime numbers using the Miller-Rabin Primality Test
+
 class MillerRabin:
     def __init__(self):
         self.p = 0
         self.q = 0
 
+    # Generate a random prime number of size n bits
     def generate_number(self, bits):
         num = random.getrandbits(bits)
 
@@ -13,6 +16,7 @@ class MillerRabin:
 
         return num
 
+    # Primality test using the Miller-Rabin Primality Test
     def is_prime(self, number, iterations=20):
         if number == 2 or number == 3:
             return True
@@ -37,17 +41,18 @@ class MillerRabin:
                 return False
         return True
 
+    # Generate a large prime number of size n bits
     def generate_prime(self, bits):
         p = 4
         while not self.is_prime(p, 20):
             p = self.generate_number(bits)
         return p
 
-    def generate_prime_duo(self,bits):
+    # Generate two large prime numbers of size n bits
+    def generate_prime_duo(self, bits):
         p = self.generate_prime(bits)
         q = self.generate_prime(bits)
         while p == q:
             q = self.generate_prime(bits)
 
-        return p,q
-
+        return p, q
