@@ -22,13 +22,8 @@ def aes_time_test(plaintext,key):
     aes = AES(key)
 
     # PLAINTEXT
-    plaintexts = pad_text(plaintext)
-
-    plaintext = ""
-    for i in plaintexts:
-        plaintext += i
-
-    plaintext_hex = get_hex_matrix(plaintext)
+    plaintext = pad_text(plaintext)
+    plaintext_hex = get_hex_list(plaintext)
     plaintext_hex = get_string_from_list(plaintext_hex)
 
     # KEY
@@ -179,15 +174,16 @@ def rsa_time_test(plaintext,keysize):
 
 
 # Text or FILE
-choice = input("Enter 1 for text or 2 for file: ")
-#choice = "1"
+#choice = input("Enter 1 for text or 2 for file: ")
+choice = "1"
 
 
 # TEXT AND KEY
 #text = "ThisIsAPlainText" # hardcoded text
 #key = "encryptionkey" # hardcoded key
 
-
+text = input("Enter the text: ")
+key = input("Enter the key ( FOR AES ONLY ): ")
 
 # INITIAL FILE CLEANING
 if os.path.exists("../AES_Time_Test.txt"):
@@ -199,9 +195,7 @@ if os.path.exists("../RSA_Time_Test.csv"):
 
 if choice == "1":
     # TEST AES
-    text = input("Enter the text: ")
-    key = input("Enter the key ( FOR AES ONLY ): ")
-    #print(text)
+    print(text)
     aes_time_test(text,key)
     # TEST RSA
     # text = "CanTheyDoTheirFest"
@@ -214,7 +208,6 @@ if choice == "1":
         rsa_time_test(text, key)
 else:
     file_path = input("Enter the file path: ")
-    key = input("Enter the key ( FOR AES ONLY ): ")
     filename, file_extension = os.path.splitext(file_path)
     file_data = read_file(file_path)
 

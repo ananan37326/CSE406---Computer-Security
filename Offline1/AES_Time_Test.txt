@@ -1,0 +1,21 @@
+Plain Text:
+CanTheyDoTheirFest  [ In ASCII ]
+43616e54686579446f54686569724665  [ In HEX ]
+
+Key:
+BUET CSE17 Batch  [ In ASCII ]
+42554554204353453137204261746368  [ In HEX ]
+
+Cipher Text:
+27ddffcfcd41984de8423b847004badb4d97dbc54b416e558f4107a50d54ea55  [ In HEX ]
+'ÝÿÏÍAMèB;pºÛMÛÅKAnUA¥TêU  [ In ASCII ]
+
+Decipher Text:
+43616e54686579446f5468656972466573742020202020202020202020202020  [ In HEX ]
+CanTheyDoTheirFest  [ In ASCII ]
+
+Execution Time:
+Key Scheduling: 0.0005869000000000013 seconds
+Encryption Time: 0.3825344 seconds
+Decryption Time: 0.4735884 seconds
+
